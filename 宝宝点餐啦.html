@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机菜单</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .menu-item { margin-top: 20px; }
+        .menu-item img { max-width: 100%; height: auto; border-radius: 10px; }
+        #randomizeButton { margin: 20px 0; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="menu-item">
+    <h2>随机菜单</h2>
+    <img id="randomDishImage" src="" alt="菜品图片" style="width: 300px; height: 200px;">
+    <h3 id="randomDishName"></h3>
+    <!-- 按钮用于刷新随机菜名和图片 -->
+    <button id="randomizeButton">宝宝，今天吃什么？</button>
+</div>
+
+<script>
+    // 示例菜品数据，您需要替换为您自己的菜名、图片URL和美团链接
+    var dishes = [
+        { name: "宫保鸡丁", image: "https://boot-img.xuexi.cn/contribute_img/20200914091933/6422569509157864.jpg", link: "https://h5.waimai.meituan.com/waimai/mindex/home" },
+        { name: "鱼香肉丝", image: "https://example.com/path-to-fish-fragrant-pork.jpg", link: "https://example.com/link-to-fish-fragrant-pork" },
+        { name: "红烧肉", image: "https://example.com/path-to-braised-pork.jpg", link: "https://example.com/link-to-braised-pork" },
+        // 更多菜品...
+    ];
+
+    function getRandomDish() {
+        var randomIndex = Math.floor(Math.random() * dishes.length);
+        var randomDish = dishes[randomIndex];
+
+        document.getElementById("randomDishName").textContent = randomDish.name;
+        document.getElementById("randomDishImage").src = randomDish.image;
+        // 更新图片下方的链接
+        document.getElementById("randomDishName").addEventListener('click', function() {
+            window.location.href = randomDish.link;
+        });
+    }
+
+    function setupRandomizeButton() {
+        var button = document.getElementById("randomDishName");
+        button.addEventListener("click", function() {
+            getRandomDish();
+        });
+    }
+
+    // 页面加载时设置按钮事件，并初始显示随机菜品
+    window.onload = function() {
+        getRandomDish();
+        setupRandomizeButton();
+    };
+</script>
+
+</body>
+</html>
